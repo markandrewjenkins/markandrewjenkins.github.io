@@ -1,152 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Mark Jenkins | Data Analytics & Reporting, Power BI, and AI Creations Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #222;
-      background: #f7f7f7;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mark Andrew Jenkins | Data Analysis &amp; Reporting</title>
+<meta name="description" content="Personal projects of Mark Andrew Jenkins - quantitative trading strategy dashboards, hardware, and AI-enabled creative work.">
+<link rel="canonical" href="https://markandrewjenkins.github.io/portfolio/">
+<style>
+  :root {
+    --bg:      #ffffff;
+    --text:    #1a1a1a;
+    --muted:   #5f6b73;
+    --border:  #e3e7ea;
+    --accent:  #0b3954;
+    --panel:   #f7f9fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:     #12181d;
+      --text:   #e6ebee;
+      --muted:  #9aa8b2;
+      --border: #262f36;
+      --accent: #7fc4dd;
+      --panel:  #171f25;
     }
-    header {
-      background: #0b3954;
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem 3rem;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      border-radius: 6px;
-    }
-    section {
-      margin-bottom: 2rem;
-    }
-    h2 {
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.3rem;
-      margin-bottom: 1rem;
-      color: #0b3954;
-      font-size: 1.3rem;
-    }
-    .project-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .project-list li {
-      margin-bottom: 1.5rem;
-    }
-    .project-title {
-      font-weight: 600;
-    }
-    .tag {
-      display: inline-block;
-      background: #e3f2fd;
-      color: #0b3954;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      margin-right: 4px;
-    }
-    a {
-      color: #0b3954;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
-      padding: 1.5rem 0 2rem;
-    }
-  </style>
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0 auto;
+    max-width: 720px;
+    padding: 3rem 1.25rem 3rem;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  h1 { font-size: 1.5rem; margin: 0 0 .15rem; letter-spacing: -.02em; }
+  h2 {
+    font-size: .78rem; font-weight: 600;
+    letter-spacing: .09em; text-transform: uppercase;
+    color: var(--muted);
+    margin: 2.25rem 0 .9rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1rem; font-weight: 600; margin: 0; }
+  p  { margin: 0 0 .7rem; text-wrap: pretty; }
+  p:last-child { margin-bottom: 0; }
+
+  a { color: var(--accent); }
+
+  .role {
+    color: var(--muted); margin: 0 0 1.4rem;
+    font-size: .88rem; line-height: 1.45;
+  }
+  .intro { color: var(--muted); font-size: .95rem; }
+
+  ul { list-style: none; margin: 0; padding: 0; }
+
+  /* Standard entry */
+  .item { padding: .9rem 0; border-bottom: 1px solid var(--border); }
+  .item:last-child { border-bottom: 0; }
+  .item-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .75rem; margin-bottom: .3rem;
+  }
+  .status { flex: none; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+  .desc { font-size: .92rem; color: var(--muted); margin: 0 0 .45rem; }
+  .meta { font-size: .78rem; color: var(--muted); }
+  .proj-link { font-size: .88rem; font-weight: 600; margin: .55rem 0 0; }
+  .meta span::after { content: " · "; }
+  .meta span:last-child::after { content: ""; }
+
+  /* Featured entry - inset panel with room for a report screenshot */
+  .featured {
+    margin: 1rem 0;
+    padding: 1.15rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 1.15rem;
+    align-items: start;
+  }
+  .featured + .featured { margin-top: .85rem; }
+  .featured h3 { font-size: 1.08rem; }
+  .featured .desc { font-size: .94rem; }
+
+  /* Screenshot slot. Replace the .shot-empty div with:
+     <img src="images/vix-report.png" alt="VIX Swing Strategy Power BI report"> */
+  .shot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    object-fit: cover;
+  }
+  .shot-empty {
+    border-style: dashed;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .74rem; color: var(--muted); text-align: center; padding: .5rem;
+  }
+
+  /* Device screenshots: two portrait frames (368x448 AMOLED) side by side */
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .shot.portrait { aspect-ratio: 368 / 448; border-radius: 12px; }
+
+  @media (max-width: 620px) {
+    .featured { grid-template-columns: 1fr; gap: .9rem; }
+  }
+
+  .tools { font-size: .92rem; color: var(--muted); }
+  .tools div { padding: .28rem 0; }
+  .tools b { color: var(--text); font-weight: 600; }
+
+  .links { font-size: .95rem; }
+  .links li { padding: .22rem 0; }
+
+  footer {
+    margin-top: 2.75rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: .78rem; line-height: 1.5; color: var(--muted);
+  }
+  footer p { margin: 0 0 .5rem; }
+  footer .copyright { color: var(--text); }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Mark Andrew Jenkins</h1>
-  <p>Data Analytics & Reporting · Power BI · AI Creations</p>
-</header>
+<h1>Mark Andrew Jenkins</h1>
+<p class="role">Director, Data Analysis &amp; Reporting | MI &amp; Reporting Design and Delivery in Power BI &amp; Fabric | AI-Fluent</p>
 
-<main>
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      I am a data analytics and reporting professional currently based in Toronto, focused on building Power BI dashboards and other reporting to guide management decision-making. 
+<p class="intro">
+  I am a director in professional services, leading internal reporting and management information
+  for a global consulting and technology business serving the insurance sector. I stay hands-on in
+  design and delivery: Power BI and Microsoft Fabric for reporting, Power Automate for automation,
+  and AI throughout via GitHub
+  Copilot, using Claude and GPT models.
+</p>
+<p class="intro">
+  I studied political science and history at the University of Victoria, and later completed an
+  MBA at the University of Toronto's Rotman School of Management, focused on strategy and
+  operations. I spent several years working in Hong Kong and have been based in Toronto since 2022.
+</p>
+<p class="intro">
+  This page collects my personal projects: quantitative trading strategies built end-to-end, from
+  signal research and backtesting to automated dashboards; hardware, starting with a custom handheld
+  device; and other pursuits, including first steps in indie game design and open data work. Most
+  are works in progress, and some may always be! Links are added as each is ready to share.
+</p>
+<p class="intro">
+  Thanks for visiting.
+</p>
+
+<h2>Trading Strategy Dashboards</h2>
+
+<div class="featured">
+  <div class="shot shot-empty">Report screenshot<br>to be added</div>
+  <div>
+    <div class="item-head">
+      <h3>VIX Swing Strategy</h3>
+      <span class="status">Live</span>
+    </div>
+    <p class="desc">
+      A swing strategy trading volatility-linked ETFs (SVIX, UVIX) on signals driven by the VIX
+      term structure. Prototyped in Pine Script, then rebuilt in Python as an event-driven
+      backtester with walk-forward validation and Bayesian parameter optimization. Results publish
+      to a self-contained HTML/JS dashboard, refreshed on a schedule via GitHub Actions. SVXY stands
+      in for SVIX where longer history is needed.
     </p>
-    <p>
-      This website is currently under construction but will serve as a portfolio of my work. Highlights will include various Power BI reports (on topics like finance / trading or local open data) and personal experiments with AI.
+    <p class="meta"><span>Python</span><span>JavaScript</span><span>HTML/CSS</span><span>Pine Script</span><span>Backtesting</span><span>Walk-forward validation</span><span>Bayesian optimization</span><span>GitHub Actions</span><span>AI-assisted development</span></p>
+    <p class="proj-link"><a href="https://markandrewjenkins.github.io/vix-swing-strategy/" target="_blank" rel="noopener">View live dashboard</a></p>
+  </div>
+</div>
+
+<div class="featured">
+  <div class="shot shot-empty">Report screenshot<br>to be added</div>
+  <div>
+    <div class="item-head">
+      <h3>QQQ Swing Strategy</h3>
+      <span class="status">Live</span>
+    </div>
+    <p class="desc">
+      The same framework applied to QQQ for Nasdaq-100 exposure, reported alongside the VIX
+      strategy so the two can be compared over the same periods.
     </p>
-  </section>
+    <p class="meta"><span>Python</span><span>JavaScript</span><span>HTML/CSS</span><span>Pine Script</span><span>Backtesting</span><span>Walk-forward validation</span><span>Bayesian optimization</span><span>AI-assisted development</span></p>
+    <p class="proj-link"><a href="https://markandrewjenkins.github.io/qqq-swing-strategy/" target="_blank" rel="noopener">View live dashboard</a></p>
+  </div>
+</div>
 
-  <section id="projects-bi">
-    <h2>Power BI Projects</h2>
-    <ul class="project-list">
-      <li>
-        <div class="project-title">Volatility ETF Swing Trading Strategy</div>
-        <span class="tag">Power BI</span>
-        <span class="tag">DAX</span>
-        <span class="tag">Finance</span>
-        <span class="tag">Trading</span>
-        <span class="tag">Volatility</span>
-        <p>
-          A Power BI report visualization of a swing trading strategy I devised (originally in Trading View's Pine Script language), oriented around volatility-related ETFs (like SVIX and UVIX). Note this strategy uses SVXY as an imperfect proxy for SVIX, due to the availability of more historical data.
-        </p>
-        <!-- Replace the link below when your first report is public -->
-        <p><a href="#">View dashboard (coming soon)</a></p>
-      </li>
-    </ul>
-  </section>
+<h2>Hardware Projects</h2>
 
-  <section id="projects-ai">
-    <h2>AI Creations</h2>
-    <ul class="project-list">
-      <li>
-        <div class="project-title">History-related AI Experiments</div>
-        <span class="tag">AI</span>
-        <span class="tag">Python</span>
-        <p>
-          Coming soon.
-        </p>
-        <!-- Replace the link below with a real demo or repo -->
-        <p><a href="#">View project (coming soon)</a></p>
-      </li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      Email: <a href="mailto:mark.andrew.jenkins@gmail.com">mark.andrew.jenkins@gmail.com</a><br>
-      GitHub: <a href="https://github.com/markandrewjenkins">github.com/markandrewjenkins</a><br>
-      LinkedIn: <a href="https://www.linkedin.com/in/markjenkins8/">https://www.linkedin.com/in/markjenkins8/</a>
+<div class="featured">
+  <div class="shots">
+    <div class="shot portrait shot-empty">Home screen<br>to be added</div>
+    <div class="shot portrait shot-empty">Game screen<br>to be added</div>
+  </div>
+  <div>
+    <div class="item-head">
+      <h3>NeonDeck</h3>
+      <span class="status">Work in progress</span>
+    </div>
+    <p class="desc">
+      A handheld device for my own use, built on Waveshare's
+      <a href="https://www.waveshare.com/esp32-s3-touch-amoled-1.8.htm" target="_blank" rel="noopener">ESP32-S3
+      1.8-inch AMOLED touch board</a>, with a custom interface inspired by the neon palette of 1980s
+      synthwave (hence "NeonDeck"). It began as a Wi-Fi remote and now runs a small set of apps: a
+      clock, battery monitor and three retro-style games that use the touchscreen, motion sensor and
+      speaker. My first hardware project, written in C++ with Claude Code. Flight tracking and
+      geocaching-style navigation are planned next.
     </p>
-  </section>
-</main>
+    <p class="meta"><span>C++</span><span>ESP32-S3</span><span>Embedded UI</span><span>Game Design</span><span>AI-assisted development</span></p>
+  </div>
+</div>
+
+<h2>Other Pursuits</h2>
+<ul>
+  <li class="item">
+    <div class="item-head">
+      <h3>Nature Simulation Game</h3>
+      <span class="status">In development</span>
+    </div>
+    <p class="desc">
+      An untitled simulation game played as a wild animal, set across the changing seasons. Built in
+      Godot 4 with GDScript, custom shaders and a Blender asset pipeline, in a low-poly style carried
+      by lighting, fog and water. More to share once it is further
+      along.
+    </p>
+    <p class="meta"><span>Godot 4</span><span>GDScript</span><span>Shaders</span><span>Blender</span><span>Game Design</span><span>AI-assisted development</span></p>
+  </li>
+
+  <li class="item">
+    <div class="item-head">
+      <h3>Urban &amp; Geospatial Open Data</h3>
+      <span class="status">Planned</span>
+    </div>
+    <p class="desc">
+      Mapping and analysis of municipal open datasets.
+    </p>
+    <p class="meta"><span>Power BI</span><span>Geospatial</span><span>Open Data</span></p>
+  </li>
+</ul>
+
+<h2>Tools</h2>
+<div class="tools">
+  <div><b>BI &amp; Automation</b> - Power BI (incl. Power Query and DAX), Power Automate, Microsoft Fabric</div>
+  <div><b>AI</b> - AI-assisted development (Claude Code, GitHub Copilot), AI agent development (Copilot Studio)</div>
+  <div><b>Code</b> - SQL and Git; Python, JavaScript, C++, GDScript and Pine Script (AI-assisted)</div>
+</div>
+
+<h2>Links</h2>
+<ul class="links">
+  <li>Email - <a href="mailto:mark.andrew.jenkins@gmail.com">mark.andrew.jenkins@gmail.com</a></li>
+  <li>LinkedIn - <a href="https://www.linkedin.com/in/markjenkins8/">linkedin.com/in/markjenkins8</a></li>
+  <li>GitHub - <a href="https://github.com/markandrewjenkins">github.com/markandrewjenkins</a></li>
+</ul>
 
 <footer>
-  © <span id="year"></span> Mark Andrew Jenkins
+  <p class="copyright">&copy; <span id="year">2026</span> Mark Andrew Jenkins. All rights reserved.</p>
+  <p>
+    Views are my own and not those of any employer; all projects are personal work. Nothing here is
+    financial, investment or trading advice: strategies are personal research, and backtested results
+    are hypothetical and not indicative of future performance. Content is provided as is, without
+    warranty. This site sets no cookies and collects no personal data.
+  </p>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>
