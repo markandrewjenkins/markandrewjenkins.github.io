@@ -14,6 +14,8 @@
     --border:  #e3e7ea;
     --accent:  #0b3954;
     --panel:   #f7f9fa;
+    --shot-edge:   rgba(16, 24, 32, .14);
+    --shot-shadow: 0 1px 2px rgba(16, 24, 32, .08), 0 3px 10px rgba(16, 24, 32, .06);
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -23,6 +25,8 @@
       --border: #262f36;
       --accent: #7fc4dd;
       --panel:  #171f25;
+      --shot-edge:   rgba(255, 255, 255, .16);
+      --shot-shadow: none;
     }
   }
 
@@ -98,11 +102,19 @@
     width: 100%;
     height: auto;
     border-radius: 5px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--shot-edge);
+    box-shadow: var(--shot-shadow);
     background: var(--bg);
   }
-  a.shot-link { display: block; }
-  a.shot-link:hover .shot { border-color: var(--accent); }
+  a.shot-link, a.zoom { display: block; }
+  a.zoom { cursor: zoom-in; }
+  a.shot-link:hover .shot, a.zoom:hover .shot { border-color: var(--accent); }
+
+  /* Full-size viewer for the device screenshots */
+  #lightbox { padding: 0; border: 0; background: transparent; max-width: 96vw; max-height: 96vh; overflow: visible; }
+  #lightbox::backdrop { background: rgba(0, 0, 0, .86); }
+  #lightbox img { display: block; height: min(92vh, 1344px); width: auto; max-width: 94vw; object-fit: contain;
+                  border-radius: 18px; cursor: zoom-out; }
 
   /* Device screenshots: 2 x 2 grid of portrait frames (368x448 AMOLED) */
   .shots { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
@@ -197,10 +209,10 @@
 
 <div class="featured">
   <div class="shots">
-    <img class="shot portrait" src="images/neondeck-home.png" width="368" height="448" alt="NeonDeck home screen with Clock, System and Settings apps over a synthwave sunset">
-    <img class="shot portrait" src="images/neondeck-neon-roads.png" width="368" height="448" alt="Neon Roads game: a ship racing into a neon half-pipe through a city at sunset">
-    <img class="shot portrait" src="images/neondeck-vapor-trails.png" width="368" height="448" alt="Vapor Trails flight tracker radar showing nearby aircraft and airports">
-    <img class="shot portrait" src="images/neondeck-vapor-trails-detail.png" width="368" height="448" alt="Vapor Trails flight detail: route, altitude, speed and heading for a selected aircraft">
+    <a class="zoom" href="images/neondeck-home-large.png" target="_blank" rel="noopener"><img class="shot portrait" src="images/neondeck-home.png" width="368" height="448" alt="NeonDeck home screen with Clock, System and Settings apps over a synthwave sunset"></a>
+    <a class="zoom" href="images/neondeck-neon-roads-large.png" target="_blank" rel="noopener"><img class="shot portrait" src="images/neondeck-neon-roads.png" width="368" height="448" alt="Neon Roads game: the ship in mid-air above a neon city avenue at sunset"></a>
+    <a class="zoom" href="images/neondeck-vapor-trails-large.png" target="_blank" rel="noopener"><img class="shot portrait" src="images/neondeck-vapor-trails.png" width="368" height="448" alt="Vapor Trails flight tracker radar showing nearby aircraft and airports"></a>
+    <a class="zoom" href="images/neondeck-vapor-trails-detail-large.png" target="_blank" rel="noopener"><img class="shot portrait" src="images/neondeck-vapor-trails-detail.png" width="368" height="448" alt="Vapor Trails flight detail: route, altitude, speed and heading for a selected aircraft"></a>
   </div>
   <div>
     <div class="item-head">
@@ -272,7 +284,26 @@
   </p>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<dialog id="lightbox" aria-label="Screenshot viewer"><img alt=""></dialog>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Click a device screenshot to view it full size; click or Esc to close.
+  var box = document.getElementById('lightbox');
+  if (box.showModal) {
+    var big = box.querySelector('img');
+    document.querySelectorAll('a.zoom').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        big.src = a.href;
+        big.alt = a.querySelector('img').alt;
+        box.showModal();
+      });
+    });
+    box.addEventListener('click', function () { box.close(); });
+  }
+</script>
 
 </body>
 </html>
