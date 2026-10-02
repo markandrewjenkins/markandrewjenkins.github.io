@@ -92,24 +92,19 @@
   .featured h3 { font-size: 1.08rem; }
   .featured .desc { font-size: .94rem; }
 
-  /* Screenshot slot. Replace the .shot-empty div with:
-     <img src="images/vix-report.png" alt="VIX Swing Strategy Power BI report"> */
+  /* Screenshots: dashboards keep their captured proportions; device shots are 368x448 */
   .shot {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: auto;
     border-radius: 5px;
     border: 1px solid var(--border);
     background: var(--bg);
-    object-fit: cover;
   }
-  .shot-empty {
-    border-style: dashed;
-    display: flex; align-items: center; justify-content: center;
-    font-size: .74rem; color: var(--muted); text-align: center; padding: .5rem;
-  }
+  a.shot-link { display: block; }
+  a.shot-link:hover .shot { border-color: var(--accent); }
 
-  /* Device screenshots: two portrait frames (368x448 AMOLED) side by side */
+  /* Device screenshots: 2 x 2 grid of portrait frames (368x448 AMOLED) */
   .shots { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
   .shot.portrait { aspect-ratio: 368 / 448; border-radius: 12px; }
 
@@ -140,7 +135,7 @@
 
 <p class="intro">
   I am a director in professional services, leading internal reporting and management information
-  for a global consulting and technology business serving the insurance sector. I stay hands-on in
+  for a global consulting and technology line of business serving the insurance sector. I stay hands-on in
   design and delivery: Power BI and Microsoft Fabric for reporting, Power Automate for automation,
   and AI throughout via GitHub
   Copilot, using Claude and GPT models.
@@ -163,7 +158,7 @@
 <h2>Trading Strategy Dashboards</h2>
 
 <div class="featured">
-  <div class="shot shot-empty">Report screenshot<br>to be added</div>
+  <a class="shot-link" href="https://markandrewjenkins.github.io/vix-swing-strategy/" target="_blank" rel="noopener"><img class="shot" src="images/vix-dashboard.webp" width="1040" height="806" alt="VIX Swing Strategy dashboard: live chart with entry and exit signals"></a>
   <div>
     <div class="item-head">
       <h3>VIX Swing Strategy</h3>
@@ -182,7 +177,7 @@
 </div>
 
 <div class="featured">
-  <div class="shot shot-empty">Report screenshot<br>to be added</div>
+  <a class="shot-link" href="https://markandrewjenkins.github.io/qqq-swing-strategy/" target="_blank" rel="noopener"><img class="shot" src="images/qqq-dashboard.webp" width="1040" height="788" alt="QQQ Swing Strategy dashboard: live chart with entry and exit signals"></a>
   <div>
     <div class="item-head">
       <h3>QQQ Swing Strategy</h3>
@@ -202,8 +197,10 @@
 
 <div class="featured">
   <div class="shots">
-    <div class="shot portrait shot-empty">Home screen<br>to be added</div>
-    <div class="shot portrait shot-empty">Game screen<br>to be added</div>
+    <img class="shot portrait" src="images/neondeck-home.png" width="368" height="448" alt="NeonDeck home screen with Clock, System and Settings apps over a synthwave sunset">
+    <img class="shot portrait" src="images/neondeck-neon-roads.png" width="368" height="448" alt="Neon Roads game: a ship racing into a neon half-pipe through a city at sunset">
+    <img class="shot portrait" src="images/neondeck-vapor-trails.png" width="368" height="448" alt="Vapor Trails flight tracker radar showing nearby aircraft and airports">
+    <img class="shot portrait" src="images/neondeck-vapor-trails-detail.png" width="368" height="448" alt="Vapor Trails flight detail: route, altitude, speed and heading for a selected aircraft">
   </div>
   <div>
     <div class="item-head">
@@ -232,8 +229,8 @@
     </div>
     <p class="desc">
       An untitled simulation game played as a wild animal, set across the changing seasons. Built in
-      Godot 4 with GDScript, custom shaders and a Blender asset pipeline, in a low-poly style carried
-      by lighting, fog and water. More to share once it is further
+      Godot 4 using GDScript, custom shaders and a Blender asset pipeline, with a stylized low-poly
+      look. More to share once it is further
       along.
     </p>
     <p class="meta"><span>Godot 4</span><span>GDScript</span><span>Shaders</span><span>Blender</span><span>Game Design</span><span>AI-assisted development</span></p>
